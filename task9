@@ -46,3 +46,52 @@ class CharacterCount {
         System.out.println("Occurrences of '" + ch + "': " + count);
     }
 }
+
+//extra task advanceTrim method to remove whitespace
+public class main{
+public static void main(String args[])
+{
+String word = "     I love  java   lang       ";
+
+boolean space = false;
+boolean isWord = false;
+int len = word.length();
+
+String Builder sb = new Stringbuilder();
+// space = true
+//isWord = true 
+// i love 
+for(int I = 0; i< len; i++)
+{
+char current = word.charAt(i);
+if(current!=" ")
+{
+if(space)
+{
+sb.append(str:" ");
+space = false;
+}
+sb.append(current);
+isWord = true;
+}
+else
+{
+if(isWord)
+{
+space = true;
+}
+}
+}
+}
+}
+
+
+
+
+
+
+
+
+
+
+
