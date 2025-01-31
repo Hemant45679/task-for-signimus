@@ -1,3 +1,5 @@
+
+
 //Implement a function to check if a given string is a palindrome.
 public class PalindromeChecker {
     public static boolean isPalindrome(String str) {
@@ -14,5 +16,21 @@ public class PalindromeChecker {
         System.out.println(isPalindrome("madam"));  // true
         System.out.println(isPalindrome("racecar"));  // true
         System.out.println(isPalindrome("hello"));  // false
+    }
+}
+//Write a program to count the occurrences of a specific character in a string.
+class CharacterCount {
+    public static void main(String[] args) {
+        String str = "banana";
+        char ch = 'a';
+        int count = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == ch) {
+                count++;
+            }
+        }
+
+        System.out.println("Occurrences of '" + ch + "': " + count);
     }
 }
