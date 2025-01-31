@@ -1,0 +1,117 @@
+/* Create a package com.company.department with two classes :
+Employee with private fields and public methods.
+Department that accesses Employee details using methods.
+Demonstrate the use of all access modifiers in a program.*/
+
+// Package declaration
+package com.company.department;
+
+// Employee class with private fields and public methods
+public class Employee {
+    private String name;   // Private field (only accessible within this class)
+    int age;               // Default access modifier (accessible within the same package)
+    protected double salary; // Protected field (accessible within the package and by subclasses)
+    public String position;  // Public field (accessible from anywhere)
+
+    // Constructor to initialize the fields
+    public Employee(String name, int age, double salary, String position) {
+        this.name = name;
+        this.age = age;
+        this.salary = salary;
+        this.position = position;
+    }
+
+    // Public getter method for the private field 'name'
+    public String getName() {
+        return name;
+    }
+
+    // Public setter method for the private field 'name'
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Public method to display employee details
+    public void displayDetails() {
+        System.out.println("Employee Name: " + name);
+        System.out.println("Age: " + age);
+        System.out.println("Salary: " + salary);
+        System.out.println("Position: " + position);
+    }
+}
+
+
+
+// Package declaration
+package com.company.department;
+
+// Department class accessing Employee details using public methods
+public class Department {
+    public static void main(String[] args) {
+        // Creating an Employee object
+        Employee emp = new Employee("John Doe", 30, 50000, "Developer");
+
+        // Accessing the public method to get employee name
+        System.out.println("Employee Name: " + emp.getName());
+
+        // Accessing the default field 'age' within the same package
+        System.out.println("Employee Age: " + emp.age);
+
+        // Accessing the protected field 'salary' within the same package
+        System.out.println("Employee Salary: " + emp.salary);
+
+        // Accessing the public field 'position'
+        System.out.println("Employee Position: " + emp.position);
+
+        // Calling the public method to display employee details
+        emp.displayDetails();
+    }
+}
+
+Explanation:
+Access Modifiers Demonstrated in the Employee Class:
+
+This class accesses Employee's fields and methods to demonstrate the use of all access modifiers.
+
+Program Output:
+Employee Name: John Doe
+Employee Age: 30
+Employee Salary: 50000.0
+Employee Position: Developer
+Employee Name: John Doe
+Age: 30
+Salary: 50000.0
+Position: Developer
+
+
+//Write a program that imports java. util classes and performs sorting of a list. in java
+import java. util.*;
+
+class SortList {
+    public static void main(String[] args) {
+        // Create a list of integers
+        List<Integer> list = new ArrayList<>();
+        
+        // Add elements to the list
+        list.add(34);
+        list.add(12);
+        list.add(56);
+        list.add(1);
+        list.add(89);
+        
+        // Print the original list
+        System. out.println("Original list: " + list);
+        
+        // Sort the list
+        Collections.sort(list);
+        
+        // Print the sorted list
+        System. out.println("Sorted list: " + list);
+    }
+}
+
+Output:
+Original list: [34, 12, 56, 1, 89]
+Sorted list: [1, 12, 34, 56, 89]
+
+
