@@ -1,0 +1,83 @@
+//Open and close resources in the finally block.
+
+class Demo11
+{
+public static void main(String ar[])
+{
+try
+{
+int x= Integer.parseInt(ar[0]);
+int y= Integer.parseInt(ar[1]);
+System.out.println(x/y);
+}
+catch(ArithmeticException e)
+{
+System.out.println("arithmetic...exception....hand..");
+}
+catch(NumberFormatExcpetion e)
+{
+System.out.println("(number...format..excpetion");
+}
+System.out.println("softwaves_1000")
+}}
+}
+
+output:-
+input             output 
+10  2              5
+                softwaves_1000
+0  2               0
+                softwaves_1000
+10 0          arithmatic ..exception...hand..
+                softwaves_100
+                
+                
+
+
+
+//program on Open and close resources in the finally block.
+class Demo11
+{
+public static void main(String ar[])
+{
+try
+{
+int x= Integer.parseInt(ar[0]);
+int y= Integer.parseInt(ar[1]);
+System.out.println(x/y);
+}
+catch(ArithmeticException e)
+{
+System.out.println("arithmetic...exception....hand..");
+}
+catch(NumberFormatExcpetion e)
+{
+System.out.println("(number...format..excpetion");
+}
+finally 
+{
+System.out.println("always executable ");
+}
+System.out.println("softwaves_1000");
+}}
+}
+
+output:-
+input             output 
+10  2              5
+                always executable 
+                softwaves_1000
+
+0  2               0
+              always executable
+                softwaves_1000
+
+10 0          arithmatic ..exception...hand..
+               always executable
+                softwaves_100
+
+//
+
+
+
+
