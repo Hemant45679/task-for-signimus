@@ -1,0 +1,62 @@
+//Create a text file and write random numbers to it.
+import java. util. Random;
+public class Main 
+{
+public static void main(String[] args)
+{ 
+Random random=new Random();
+int max=500; //Generate random integer between 100 to 500.
+System. out. println("Generating random number between "+min+" to "+max); 
+
+System. out. println(random. nextInt(max-min+1)+min); ...
+} }
+
+//Read the file and print the sum of those numbers.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Write a program using BufferedReader to read a file line-by-line and count the number of lines.
+import.java.io.*;
+class Demo
+{
+static public void main(String abc[])throws IOException
+{
+InputStreamReader i = new InputStreamReader(System.in);
+BufferedReader br = new BufferedReader(i);
+System.out.pritnln("Enter no 1");
+String s1= br.readLine();
+System.out.pritnln("Enter no 2");
+String s2= br.readLine();
+int x= Integer.parseInt(s1);
+int y= Integer.parseInt(s2);
+System.out.println("sum="+(s1+s2));
+}
+}
+
+output:-
+Enter No1
+10
+Enter No2
+20
+sum=30
+
+
+
+
+
+
+
+
+
