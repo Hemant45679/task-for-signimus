@@ -1,0 +1,67 @@
+/*Library Management System where students (threads) try to borrow and return books. To ensure thread safety,
+we use synchronized methods so that only one student can borrow or return a book at a time.
+Use wait() method and notify() method to manage the synchronization. in java basic program */
+
+class Library {
+    private int availableBooks;
+
+    public Library(int availableBooks) {
+        this.availableBooks = availableBooks;
+    }
+
+    // Borrow a book
+    public synchronized void borrowBook(String studentName) {
+        while (availableBooks == 0) {
+            System.out.println(studentName + " is waiting for a book to be available.");
+            try {
+                wait(); // Student waits if no book is available
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        availableBooks--;
+        System.out.println(studentName + " borrowed a book. Books left: " + availableBooks);
+    }
+
+    // Return a book
+    public synchronized void returnBook(String studentName) {
+        availableBooks++;
+        System.out.println(studentName + " returned a book. Books left: " + availableBooks);
+        notify(); // Notify a waiting student that a book is available
+    }
+}
+
+class Student extends Thread {
+    private Library library;
+    private String studentName;
+
+    public Student(Library library, String studentName) {
+        this.library = library;
+        this.studentName = studentName;
+    }
+
+    @Override
+    public void run() {
+        library.borrowBook(studentName);
+        try {
+            Thread.sleep(2000); // Simulate reading time
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        library.returnBook(studentName);
+    }
+}
+
+public class LibraryManagementSystem {
+    public static void main(String[] args) {
+        Library library = new Library(2); // Library starts with 2 books
+
+        Student s1 = new Student(library, "Student 1");
+        Student s2 = new Student(library, "Student 2");
+        Student s3 = new Student(library, "Student 3");
+
+        s1.start();
+        s2.start();
+        s3.start();
+    }
+}
