@@ -1,0 +1,142 @@
+// Create a generic class Pair<T, U> that can hold two different types of values. Implement methods to set and get these values
+class Pair<T, U> {
+    private T first;
+    private U second;
+
+    // Constructor
+    public Pair(T first, U second) {
+        this.first = first;
+        this.second = second;
+    }
+
+    // Getter for first value
+    public T getFirst() {
+        return first;
+    }
+
+    // Setter for first value
+    public void setFirst(T first) {
+        this.first = first;
+    }
+
+    // Getter for second value
+    public U getSecond() {
+        return second;
+    }
+
+    // Setter for second value
+    public void setSecond(U second) {
+        this.second = second;
+    }
+
+    // Display values
+    @Override
+    public String toString() {
+        return "(" + first + ", " + second + ")";
+    }
+}
+
+// Main class to test Pair class
+public class GenericPairExample {
+    public static void main(String[] args) {
+        // Creating a Pair of String and Integer
+        Pair<String, Integer> pair1 = new Pair<>("Age", 25);
+        System.out.println("Initial Pair: " + pair1);
+
+        // Updating values
+        pair1.setFirst("New Age");
+        pair1.setSecond(30);
+        System.out.println("Updated Pair: " + pair1);
+
+        // Creating a Pair of Double and Boolean
+        Pair<Double, Boolean> pair2 = new Pair<>(99.5, true);
+        System.out.println("Another Pair: " + pair2);
+    }
+}
+output :-
+Initial Pair: (Age, 25)
+Updated Pair: (New Age, 30)
+Another Pair: (99.5, true)
+
+
+
+
+
+//Write a generic method swap() that takes two elements of the same type and swaps their values.in java
+
+import java.util.Arrays;
+
+// Utility class for generic swap method
+class SwapUtil {
+    // Generic method to swap two elements in an array
+    public static <T> void swap(T[] array, int i, int j) {
+        if (i < 0 || j < 0 || i >= array.length || j >= array.length) {
+            throw new IllegalArgumentException("Index out of bounds");
+        }
+        T temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+
+// Main class to test swap method
+public class GenericSwapExample {
+    public static void main(String[] args) {
+        // Example with Integer array
+        Integer[] numbers = {1, 2, 3, 4};
+        System.out.println("Before Swap: " + Arrays.toString(numbers));
+        SwapUtil.swap(numbers, 1, 3);
+        System.out.println("After Swap: " + Arrays.toString(numbers));
+
+        // Example with String array
+        String[] words = {"apple", "banana", "cherry"};
+        System.out.println("Before Swap: " + Arrays.toString(words));
+        SwapUtil.swap(words, 0, 2);
+        System.out.println("After Swap: " + Arrays.toString(words));
+    }
+}
+
+Output:-
+Before Swap: [1, 2, 3, 4]
+After Swap: [1, 4, 3, 2]
+Before Swap: [apple, banana, cherry]
+After Swap: [cherry, banana, apple]
+
+
+3.Create a generic method that finds the maximum of three numbers, where the numbers can be in java 
+
+
+
+// Utility class with a generic method to find the maximum of three numbers
+class MaxUtil {
+    // Generic method to find the maximum of three Comparable numbers
+    public static <T extends Comparable<T>> T findMax(T a, T b, T c) {
+        T max = a;
+        if (b.compareTo(max) > 0) {
+            max = b;
+        }
+        if (c.compareTo(max) > 0) {
+            max = c;
+        }
+        return max;
+    }
+}
+
+// Main class to test findMax method
+public class GenericMaxExample {
+    public static void main(String[] args) {
+        // Testing with Integer values
+        System.out.println("Max of (10, 20, 15): " + MaxUtil.findMax(10, 20, 15));
+
+        // Testing with Double values
+        System.out.println("Max of (5.5, 2.2, 8.8): " + MaxUtil.findMax(5.5, 2.2, 8.8));
+
+        // Testing with String values (lexicographical order)
+        System.out.println("Max of (\"apple\", \"orange\", \"banana\"): " + MaxUtil.findMax("apple", "orange", "banana"));
+    }
+}
+
+output:-
+Max of (10, 20, 15): 20
+Max of (5.5, 2.2, 8.8): 8.8
+Max of ("apple", "orange", "banana"): orange
