@@ -1,0 +1,82 @@
+//Create a simple blog application where a blog post can have multiple comments, and each comment belongs to one blog post.
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.*;
+import java.util.List;
+
+@SpringBootApplication
+public class BlogApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(BlogApplication.class, args);
+    }
+}
+
+@Entity
+class BlogPost {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String title;
+    private String content;
+
+    @OneToMany(mappedBy = "blogPost", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+    // Getters and Setters
+}
+
+@Entity
+class Comment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String text;
+
+    @ManyToOne
+    @JoinColumn(name = "blog_post_id")
+    private BlogPost blogPost;
+
+    // Getters and Setters
+}
+
+interface BlogPostRepository extends JpaRepository<BlogPost, Long> {}
+interface CommentRepository extends JpaRepository<Comment, Long> {}
+
+@RestController
+@RequestMapping("/posts")
+class BlogPostController {
+    private final BlogPostRepository blogPostRepository;
+    private final CommentRepository commentRepository;
+
+    public BlogPostController(BlogPostRepository blogPostRepository, CommentRepository commentRepository) {
+        this.blogPostRepository = blogPostRepository;
+        this.commentRepository = commentRepository;
+    }
+
+    @PostMapping
+    public BlogPost createPost(@RequestBody BlogPost blogPost) {
+        return blogPostRepository.save(blogPost);
+    }
+
+    @GetMapping
+    public List<BlogPost> getAllPosts() {
+        return blogPostRepository.findAll();
+    }
+
+    @PostMapping("/{postId}/comments")
+    public Comment addComment(@PathVariable Long postId, @RequestBody Comment comment) {
+        return blogPostRepository.findById(postId).map(post -> {
+            comment.setBlogPost(post);
+            return commentRepository.save(comment);
+        }).orElseThrow(() -> new RuntimeException("Post not found"));
+    }
+
+    @GetMapping("/{postId}/comments")
+    public List<Comment> getComments(@PathVariable Long postId) {
+        return commentRepository.findAll();
+    }
+}
